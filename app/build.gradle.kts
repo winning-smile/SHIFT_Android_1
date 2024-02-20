@@ -45,7 +45,9 @@ android {
 }
 
 dependencies {
-    implementation("androidx.compose.material3:material3-android:1.2.0-beta01")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.2")
+    implementation("org.json:json:20230227")
+    implementation("com.google.code.gson:gson:2.9.1")
     val composeBom = platform("androidx.compose:compose-bom:2023.10.01")
     implementation(composeBom)
     androidTestImplementation(composeBom)
