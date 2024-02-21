@@ -1,34 +1,56 @@
 package com.example.shift_android_1
 
-import android.content.Context
+import PrefDataStore
+import android.annotation.SuppressLint
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.core.view.WindowInsetsControllerCompat
-import com.example.shift_android_1.models.ApiResponse
 import com.example.shift_android_1.models.MainViewModel
 import com.example.shift_android_1.screens.mainScreen
-import com.example.shift_android_1.theme.SHIFTTheme
-import com.google.gson.GsonBuilder
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel = MainViewModel()
+
+    @SuppressLint("CoroutineCreationDuringComposition")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContent {
-            window.statusBarColor = Color.parseColor("#ffeaec")
-            window.navigationBarColor = Color.parseColor("#FFA42527")
-            val controller = WindowInsetsControllerCompat(window, window.decorView)
-            controller.isAppearanceLightStatusBars = true
+        var prefDataStore = PrefDataStore(this)
+        CoroutineScope(Dispatchers.IO).launch {
+            prefDataStore.getInfo().collect() {
+                withContext(Dispatchers.Main) {
+                    Log.i("hope", it.apst)
+                    if (it.apst == "") {
+                        runBlocking {
+                            val job = launch {
+                                Log.i("hope", "fetch")
+                                viewModel.fetchFromApi(prefDataStore)
+                            }
+                        }
+                    } else {
+                            prefDataStore.getInfo().collect() {
+                                    viewModel.setFromStorage(it.apst)
+                            }
+                        }
+                    }
+                }
+            }
 
-            mainScreen(viewModel)
+            setContent {
+                window.statusBarColor = Color.parseColor("#ffeaec")
+                window.navigationBarColor = Color.parseColor("#FFA42527")
+                val controller = WindowInsetsControllerCompat(window, window.decorView)
+                controller.isAppearanceLightStatusBars = true
 
+                mainScreen(viewModel)
+            }
         }
-    }
 
-}
+    }

@@ -19,7 +19,6 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.shift_android_1.models.DataState
 import com.example.shift_android_1.models.MainViewModel
 import com.example.shift_android_1.models.ApiResponse
-import com.example.shift_android_1.pref.DataStorePreferenceRepository
 import com.example.shift_android_1.theme.shiftBackground
 import com.example.shift_android_1.theme.shiftPrimary
 import com.example.shift_android_1.ui.body.bottomBar
@@ -30,6 +29,7 @@ import com.example.shift_android_1.ui.cardItem.fullCard
 @Composable
 fun mainScreen(viewModel: MainViewModel)
 {
+
     when (val result = viewModel.response.value) {
         is DataState.Loading -> {
             Box(
@@ -41,10 +41,6 @@ fun mainScreen(viewModel: MainViewModel)
         }
 
         is DataState.Success -> {
-           ///LaunchedEffect(key1 = true) {
-           ///    viewModel.saveData(result.data)
-
-           ///}
             Scaffold(
                 topBar = { topAppBarView() },
                 bottomBar = { bottomBar() },

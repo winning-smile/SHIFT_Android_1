@@ -45,7 +45,11 @@ android {
 }
 
 dependencies {
-    implementation ("androidx.datastore:datastore-preferences:1.0.0-alpha05")
+    val preference_version = "1.2.1"
+    implementation("androidx.preference:preference-ktx:$preference_version")
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+    implementation("androidx.datastore:datastore-preferences-core:1.0.0")
+
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.2")
     implementation("org.json:json:20230227")
     implementation("com.google.code.gson:gson:2.9.1")
