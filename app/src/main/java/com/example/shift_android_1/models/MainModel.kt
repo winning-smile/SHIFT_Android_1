@@ -1,27 +1,22 @@
 package com.example.shift_android_1.models
 
 import android.annotation.SuppressLint
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.google.gson.Gson
+import com.example.shift_android_1.pref.DataStorePreferenceRepository
 import com.google.gson.GsonBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
-import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
-import java.net.HttpURLConnection
 import java.net.URL
-import java.util.Dictionary
 import javax.net.ssl.HttpsURLConnection
 
 
@@ -31,9 +26,7 @@ sealed class DataState {
     object Loading : DataState()
     object Empty : DataState()
 }
-
-class MainViewModel : ViewModel() {
-
+class MainViewModel() : ViewModel() {
     val response: MutableState<DataState> = mutableStateOf(DataState.Empty)
 
     init {
@@ -65,7 +58,6 @@ class MainViewModel : ViewModel() {
                         }
                     }
                 }
-
                 response
             },
                 onPostExecute = {
@@ -78,8 +70,8 @@ class MainViewModel : ViewModel() {
                         tempList.add(gson.fromJson(result.value, ApiResponse::class.java))
                     }
                     response.value = DataState.Success(tempList)
-
                 })
     }
+
 }
 
