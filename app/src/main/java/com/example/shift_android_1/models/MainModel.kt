@@ -25,20 +25,8 @@ import java.util.Dictionary
 import javax.net.ssl.HttpsURLConnection
 
 
-//data class Person(val id: Long = counter++, val img: String?=null, val fname: String?=null, val birthday: String?=null,
-//                   val eaddress: String?=null, val number: String?=null, val country: String?=null, val city: String?=null,
-//                   val street: String?=null , val username: String?=null, val password: String?=null) {
-//    companion object {
-//        private var counter = 0L
-//    }
-//}
-
-data class Person(val name: String, val gender: String)
-
-
-
 sealed class DataState {
-    class Success(val data: MutableList<Person>) : DataState()
+    class Success(val data: MutableList<ApiResponse>) : DataState()
     class Failure(val message: String) : DataState()
     object Loading : DataState()
     object Empty : DataState()
@@ -69,23 +57,28 @@ class MainViewModel : ViewModel() {
                 val response = StringBuilder()
 
                 val url = URL("https://randomuser.me/api/")
-                val connection = url.openConnection() as HttpsURLConnection
-                BufferedReader(InputStreamReader(connection.inputStream)).useLines { lines ->
-                    for (line in lines) {
-                        response.append(line).append("\n")
+                for (i in 1..10) {
+                    val connection = url.openConnection() as HttpsURLConnection
+                    BufferedReader(InputStreamReader(connection.inputStream)).useLines { lines ->
+                        for (line in lines) {
+                            response.append(line).append("\n")
+                        }
                     }
                 }
 
-                response.toString()
+                response
             },
                 onPostExecute = {
 
                     val gson = GsonBuilder().create()
-                    val root = gson.fromJson<ApiResponse>(it, ApiResponse::class.java)
-                    val tempList = mutableListOf<Person>()
-                    tempList.add(Person(gender = root.results[0].gender.toString(), name = root.results[0].name.first))
-                    Log.i("DATA", root.results[0].gender.toString())
+                    val tempList = mutableListOf<ApiResponse>()
+                    val regex = Regex("\\{.results..*?\\}\n")
+                    regex.findAll(it).forEach{ result->
+                        Log.i("MDATA", result.value.toString())
+                        tempList.add(gson.fromJson(result.value, ApiResponse::class.java))
+                    }
                     response.value = DataState.Success(tempList)
+
                 })
     }
 }
