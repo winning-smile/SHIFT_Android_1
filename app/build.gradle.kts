@@ -51,7 +51,6 @@ dependencies {
     implementation("androidx.datastore:datastore-preferences:1.0.0")
     implementation("androidx.datastore:datastore-preferences-core:1.0.0")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.2")
     implementation("org.json:json:20230227")
     implementation("com.google.code.gson:gson:2.9.1")
     val composeBom = platform("androidx.compose:compose-bom:2023.10.01")

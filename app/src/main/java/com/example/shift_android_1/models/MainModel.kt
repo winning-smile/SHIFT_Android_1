@@ -26,6 +26,8 @@ sealed class DataState {
     object Loading : DataState()
     object Empty : DataState()
 }
+
+
 class MainViewModel() : ViewModel() {
     val response: MutableState<DataState> = mutableStateOf(DataState.Empty)
     private var rawResponse: String = ""
@@ -35,6 +37,9 @@ class MainViewModel() : ViewModel() {
     var isSheetOpenLogin by mutableStateOf(false)
     var isSheetOpenMeta by mutableStateOf(false)
 
+    init{
+        response.value = DataState.Loading
+    }
     fun restorePopUps(){
         isSheetOpenBio = true
         isSheetOpenContact = true

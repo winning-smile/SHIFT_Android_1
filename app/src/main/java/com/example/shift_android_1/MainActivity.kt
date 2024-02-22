@@ -10,22 +10,16 @@ import androidx.activity.compose.setContent
 import androidx.core.view.WindowInsetsControllerCompat
 import com.example.shift_android_1.models.ComposeNavigation
 import com.example.shift_android_1.models.MainViewModel
-import com.example.shift_android_1.screens.mainScreen
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
-//TODO INFORMATION FLOW TO OTHER APPS [done]
-//TODO REFRESH PERSONS [done]
-//TODO SMOOTH SCREEN TRANSITION
-//TODO SMALL ERRORS WHILE FETCHING AND TRANSITION NOT TO SHOW
-//TODO INFO SCREEN
 //TODO APP ICONS
 //TODO WRITE CONFIG AND KNOWING ERRORS (2GIS OVER GOOGLE MAPS, NIGHT MODE) + ЛОКАЛИТЬ ПЕРЕМЕННЫЕ В GLOBAL SCOPE
-//TODO CLEAR IMPORTS AND IMPLEMENTATION SOURCES
 //TODO КОММЕНТАРИИ И АННОТАЦИИ
+//TODO InfoBody rewrite to functions
 
 class MainActivity : AppCompatActivity() {
     private val viewModel = MainViewModel()
