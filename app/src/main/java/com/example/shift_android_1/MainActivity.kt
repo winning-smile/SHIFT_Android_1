@@ -21,7 +21,7 @@ import kotlinx.coroutines.withContext
 //TODO SMOOTH SCREEN TRANSITION
 //TODO SMALL ERRORS WHILE FETCHING AND TRANSITION NOT TO SHOW
 //TODO INFORMATION FLOW TO OTHER APPS
-//TODO REFRESH PERSONS
+//TODO REFRESH PERSONS [done]
 //TODO INFO SCREEN
 class MainActivity : AppCompatActivity() {
     private val viewModel = MainViewModel()

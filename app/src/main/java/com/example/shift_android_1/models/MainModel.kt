@@ -30,14 +30,14 @@ class MainViewModel() : ViewModel() {
     val response: MutableState<DataState> = mutableStateOf(DataState.Empty)
     private var rawResponse: String = ""
     var isSheetOpenBio by mutableStateOf(true)
-    var isSheetOpenContact by mutableStateOf(false)
+    var isSheetOpenContact by mutableStateOf(true)
     var isSheetOpenLocation by mutableStateOf(false)
     var isSheetOpenLogin by mutableStateOf(false)
     var isSheetOpenMeta by mutableStateOf(false)
 
     fun restorePopUps(){
         isSheetOpenBio = true
-        isSheetOpenContact = false
+        isSheetOpenContact = true
         isSheetOpenLocation = false
         isSheetOpenLogin = false
         isSheetOpenMeta = false

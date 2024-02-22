@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.Text
 import androidx.compose.material.Card
 import androidx.compose.material.ripple.rememberRipple
@@ -23,6 +24,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -63,7 +65,7 @@ fun fullCard(person: ApiResponse,  navController: NavController) {
             Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 10.dp)){
                 Text(text=person.results[0].name.first + " " + person.results[0].name.last, fontWeight = FontWeight.Bold)
                 Text(text="Phone: " + person.results[0].phone)
-                Text(text="Address: " + person.results[0].location.street.number.toString() + " " + person.results[0].location.street.name)
+                Text(text="Address: " + person.results[0].location.street.number.toString() + " " + person.results[0].location.street.name, maxLines = 1, overflow = TextOverflow.Ellipsis)
             }
         }
     }
