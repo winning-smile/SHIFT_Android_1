@@ -1,5 +1,6 @@
 package com.example.shift_android_1.screens
 
+import PrefDataStore
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -28,7 +29,7 @@ import com.example.shift_android_1.ui.cardItem.fullCard
 
 /* TODO  УДАЛИТЬ НЕНУЖНЫЕ ИМПОРТЫ */
 @Composable
-fun mainScreen(viewModel: MainViewModel,  navController: NavController)
+fun mainScreen(viewModel: MainViewModel,  navController: NavController, prefDataStore: PrefDataStore)
 {
 
     when (val result = viewModel.response.value) {
@@ -44,7 +45,7 @@ fun mainScreen(viewModel: MainViewModel,  navController: NavController)
         is DataState.Success -> {
             Scaffold(
                 topBar = { topAppBarView() },
-                bottomBar = { bottomBar() },
+                bottomBar = { bottomBar(viewModel, prefDataStore) },
                 backgroundColor = shiftBackground
             ) { innerPadding ->
                 ShowLazyList(result.data, innerPadding,  navController)
