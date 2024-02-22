@@ -23,6 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -34,6 +35,7 @@ import com.example.shift_android_1.theme.shiftPrimary
 
 @Composable
 fun bottomBar(viewModel: MainViewModel, prefDataStore: PrefDataStore, navController: NavController) {
+    val context = LocalContext.current
     Row(
         horizontalArrangement = Arrangement.Center, verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.padding(vertical = 0.dp).clip(shape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp)).background(shiftPrimary).fillMaxWidth().
@@ -60,7 +62,7 @@ fun bottomBar(viewModel: MainViewModel, prefDataStore: PrefDataStore, navControl
 
         Divider(color = shiftOnPrimary, modifier = Modifier.fillMaxHeight().width(1.dp))
 
-        IconButton(onClick = {viewModel.fetchFromApi(prefDataStore)}, modifier = Modifier.weight(1f)){
+        IconButton(onClick = {viewModel.fetchFromApi(prefDataStore, context)}, modifier = Modifier.weight(1f)){
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center){
                 Text("Refresh", fontWeight = FontWeight.Bold, fontSize = 15.sp, color= Color.White)
                 Icon(imageVector = Icons.Filled.Refresh,

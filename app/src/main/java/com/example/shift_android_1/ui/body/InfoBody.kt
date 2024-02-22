@@ -105,12 +105,12 @@ fun infoBody(
             AnimatedVisibility(
                 visible=viewModel.isSheetOpenContact,
                 enter = slideInVertically() + expandVertically(expandFrom = Alignment.Top),
-                exit = slideOutVertically() + shrinkVertically()
+                exit = slideOutVertically() + shrinkVertically(shrinkTowards = Alignment.Top)
             )
             {
                 Column {
                     Row(verticalAlignment = Alignment.CenterVertically){
-                        Text("Email: ${result.results[0].email}")
+
                         IconButton(onClick = {val flag = context.sendMail(result.results[0].email)
                             if (flag == "404") {
                                 scope.launch {
@@ -125,9 +125,9 @@ fun infoBody(
                             Icon(imageVector = Icons.Filled.Mail,
                                 contentDescription = "Test", tint = shiftPrimary)
                         }
+                        Text("Email: ${result.results[0].email}")
                     }
                     Row(verticalAlignment = Alignment.CenterVertically){
-                        Text("Phone number: ${result.results[0].phone}")
                         IconButton(onClick = {val flag = context.makeCall(result.results[0].phone)
                             if (flag == "400"){
                                 scope.launch {
@@ -137,9 +137,9 @@ fun infoBody(
                                 Icon(imageVector = Icons.Filled.Call,
                                     contentDescription = "Test", tint = shiftPrimary)
                         }
+                        Text("Phone number: ${result.results[0].phone}")
                     }
                     Row(verticalAlignment = Alignment.CenterVertically){
-                        Text("Cell: ${result.results[0].cell}")
                         IconButton(onClick = {val flag = context.makeCall(result.results[0].cell)
                             if (flag == "400"){
                                 scope.launch {
@@ -149,6 +149,7 @@ fun infoBody(
                             Icon(imageVector = Icons.Filled.Call,
                                 contentDescription = "Test", tint = shiftPrimary)
                         }
+                        Text("Cell: ${result.results[0].cell}")
                     }
                 }
             }
@@ -164,14 +165,12 @@ fun infoBody(
             AnimatedVisibility(
                 visible = viewModel.isSheetOpenLocation,
                 enter = slideInVertically() + expandVertically(expandFrom = Alignment.Top),
-                exit = slideOutVertically() + shrinkVertically()
+                exit = slideOutVertically() + shrinkVertically(shrinkTowards = Alignment.Top)
             )
             {
                 Column {
                     Text("Location: ${result.results[0].location.country}, ${result.results[0].location.state}, ${result.results[0].location.city}")
-
                     Row(verticalAlignment = Alignment.CenterVertically){
-                        Text("Address: ${result.results[0].location.street.number.toString()} ${result.results[0].location.street.name}")
                         IconButton(onClick =
                         {val flag = context.findAddress(result.results[0].location.street.number.toString() + " " + result.results[0].location.street.name, result.results[0].location.city)
                             if (flag == "404") {
@@ -187,12 +186,12 @@ fun infoBody(
                             Icon(imageVector = Icons.Filled.Place,
                                 contentDescription = "Test", tint = shiftPrimary)
                         }
+                        Text("Address: ${result.results[0].location.street.number.toString()} ${result.results[0].location.street.name}")
                     }
 
                     Text("Postcode: ${result.results[0].location.postcode}")
                     Text("Timezone: ${result.results[0].location.timezone.description} ${result.results[0].location.timezone.offset}")
                     Row(verticalAlignment = Alignment.CenterVertically){
-                        Text("Coordinates: ${result.results[0].location.coordinates.latitude} ${result.results[0].location.coordinates.longitude}")
                         IconButton(onClick = {val flag = context.findPlace(result.results[0].location.coordinates.latitude, result.results[0].location.coordinates.longitude)
                             if (flag == "404") {
                                 scope.launch {
@@ -207,6 +206,7 @@ fun infoBody(
                             Icon(imageVector = Icons.Filled.Place,
                                 contentDescription = "Test", tint = shiftPrimary)
                         }
+                        Text("Coordinates: ${result.results[0].location.coordinates.latitude} ${result.results[0].location.coordinates.longitude}")
                     }
                 }
             }
@@ -223,7 +223,7 @@ fun infoBody(
             AnimatedVisibility(
                 visible = viewModel.isSheetOpenLogin,
                 enter = slideInVertically() + expandVertically(expandFrom = Alignment.Top),
-                exit = slideOutVertically() + shrinkVertically()
+                exit = slideOutVertically() + shrinkVertically(shrinkTowards = Alignment.Top)
             )
             {
                 Column {
@@ -246,7 +246,7 @@ fun infoBody(
             AnimatedVisibility(
                 visible = viewModel.isSheetOpenMeta,
                 enter = slideInVertically() + expandVertically(expandFrom = Alignment.Top),
-                exit = slideOutVertically() + shrinkVertically()
+                exit = slideOutVertically() + shrinkVertically(shrinkTowards = Alignment.Top)
             )
             {
                 Column{

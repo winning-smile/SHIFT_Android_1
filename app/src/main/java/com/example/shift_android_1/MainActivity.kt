@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var prefDataStore = PrefDataStore(this)
+        val context = this
         CoroutineScope(Dispatchers.IO).launch {
             prefDataStore.getInfo().collect() {
                 withContext(Dispatchers.Main) {
@@ -35,7 +36,7 @@ class MainActivity : AppCompatActivity() {
                         runBlocking {
                             val job = launch {
                                 Log.i("hope", "fetch")
-                                viewModel.fetchFromApi(prefDataStore)
+                                viewModel.fetchFromApi(prefDataStore, context)
                             }
                         }
                     } else {

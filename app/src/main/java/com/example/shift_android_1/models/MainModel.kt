@@ -2,11 +2,13 @@ package com.example.shift_android_1.models
 
 import PrefDataStore
 import android.annotation.SuppressLint
+import android.content.Context
 import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.GsonBuilder
@@ -49,6 +51,8 @@ class MainViewModel() : ViewModel() {
     }
 
     fun setFromStorage(rawString: String){
+        response.value = DataState.Loading
+
         val gson = GsonBuilder().create()
         val tempList = mutableListOf<ApiResponse>()
         val regex = Regex("\\{.results..*?\\}\n")
@@ -71,40 +75,47 @@ class MainViewModel() : ViewModel() {
         }
 
     @SuppressLint("SuspiciousIndentation")
-    fun fetchFromApi(prefDataStore: PrefDataStore) {
+    fun fetchFromApi(prefDataStore: PrefDataStore, context: Context) {
         response.value = DataState.Loading
 
-        viewModelScope.executeAsyncTask(onPreExecute = {}, doInBackground = {
-            val response = StringBuilder()
+        if (isOnline(context)){
+            viewModelScope.executeAsyncTask(onPreExecute = {}, doInBackground = {
+                val response = StringBuilder()
 
-            val url = URL("https://randomuser.me/api/")
-            for (i in 1..10) {
-                val connection = url.openConnection() as HttpsURLConnection
-                BufferedReader(InputStreamReader(connection.inputStream)).useLines { lines ->
-                    for (line in lines) {
-                        response.append(line).append("\n")
+                val url = URL("https://randomuser.me/api/")
+                for (i in 1..10) {
+                    val connection = url.openConnection() as HttpsURLConnection
+                    BufferedReader(InputStreamReader(connection.inputStream)).useLines { lines ->
+                        for (line in lines) {
+                            response.append(line).append("\n")
+                        }
                     }
                 }
-            }
-            response
-        },
-            onPostExecute = {
+                response
+            },
+                onPostExecute = {
 
-                val gson = GsonBuilder().create()
-                val tempList = mutableListOf<ApiResponse>()
-                val regex = Regex("\\{.results..*?\\}\n")
-                regex.findAll(it).forEach { result ->
-                    Log.i("MDATA", result.value.toString())
-                    tempList.add(gson.fromJson(result.value, ApiResponse::class.java))
-                }
-                response.value = DataState.Success(tempList)
-                rawResponse = it.toString()
-                runBlocking {
-                    Log.i("hope", "set")
-                    prefDataStore.setInfo(rawResponse)
-                    Log.i("hope", rawResponse)
-                }
-            })
+                    val gson = GsonBuilder().create()
+                    val tempList = mutableListOf<ApiResponse>()
+                    val regex = Regex("\\{.results..*?\\}\n")
+                    regex.findAll(it).forEach { result ->
+                        Log.i("MDATA", result.value.toString())
+                        tempList.add(gson.fromJson(result.value, ApiResponse::class.java))
+                    }
+                    response.value = DataState.Success(tempList)
+                    rawResponse = it.toString()
+                    runBlocking {
+                        Log.i("hope", "set")
+                        prefDataStore.setInfo(rawResponse)
+                        Log.i("hope", rawResponse)
+                    }
+                })
+        }
+        else{
+            response.value = DataState.Failure("No internet connection")
+        }
+
+
     }
 }
 
