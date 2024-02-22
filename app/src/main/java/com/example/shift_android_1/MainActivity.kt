@@ -16,7 +16,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withContext
 
-//TODO APP ICONS
 //TODO WRITE CONFIG AND KNOWING ERRORS (2GIS OVER GOOGLE MAPS, NIGHT MODE) + ЛОКАЛИТЬ ПЕРЕМЕННЫЕ В GLOBAL SCOPE
 //TODO КОММЕНТАРИИ И АННОТАЦИИ
 //TODO InfoBody rewrite to functions
