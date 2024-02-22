@@ -45,7 +45,7 @@ fun mainScreen(viewModel: MainViewModel,  navController: NavController, prefData
         is DataState.Success -> {
             Scaffold(
                 topBar = { topAppBarView() },
-                bottomBar = { bottomBar(viewModel, prefDataStore) },
+                bottomBar = { bottomBar(viewModel, prefDataStore, navController) },
                 backgroundColor = shiftBackground
             ) { innerPadding ->
                 ShowLazyList(result.data, innerPadding,  navController)

@@ -5,6 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.shift_android_1.screens.configScreen
 import com.example.shift_android_1.screens.infoScreen
 import com.example.shift_android_1.screens.mainScreen
 
@@ -22,6 +23,10 @@ fun ComposeNavigation(viewModel: MainViewModel, prefDataStore: PrefDataStore) {
         {
             val result = navController.previousBackStackEntry?.savedStateHandle?.get<ApiResponse>("person_data")
             infoScreen(result, viewModel, navController = navController)
+        }
+        composable(route = "config_screen")
+        {
+           configScreen(viewModel, navController = navController)
         }
     }
 }

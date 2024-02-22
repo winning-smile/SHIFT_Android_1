@@ -27,20 +27,30 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import com.example.shift_android_1.models.MainViewModel
 import com.example.shift_android_1.theme.shiftOnPrimary
 import com.example.shift_android_1.theme.shiftPrimary
 
 @Composable
-fun bottomBar(viewModel: MainViewModel, prefDataStore: PrefDataStore) {
+fun bottomBar(viewModel: MainViewModel, prefDataStore: PrefDataStore, navController: NavController) {
     Row(
         horizontalArrangement = Arrangement.Center, verticalAlignment = Alignment.CenterVertically,
         modifier = Modifier.padding(vertical = 0.dp).clip(shape = RoundedCornerShape(20.dp, 20.dp, 0.dp, 0.dp)).background(shiftPrimary).fillMaxWidth().
         padding(vertical = 5.dp).height(35.dp)
     )
     {
-        IconButton(onClick = {}, modifier = Modifier.weight(1f)){
+        IconButton(onClick = {navController.navigate("config_screen")
+        {
+            popUpTo(navController.graph.findStartDestination().id)
+            {
+                saveState = true
+            }
+            launchSingleTop = true
+            restoreState = true
+        }
+                             }, modifier = Modifier.weight(1f)){
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center){
                 Text("Info ", fontWeight = FontWeight.Bold, fontSize = 15.sp, color= Color.White)
                 Icon(imageVector = Icons.Filled.Info,
