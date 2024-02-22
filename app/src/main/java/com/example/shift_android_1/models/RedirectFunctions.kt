@@ -7,11 +7,11 @@ import android.net.Uri
 import androidx.compose.runtime.NoLiveLiterals
 
 @NoLiveLiterals
-fun Context.sendMail(to: String): String {
+fun Context.sendMail(email: String): String {
     try {
         val intent = Intent(Intent.ACTION_SEND)
         intent.type = "vnd.android.cursor.item/email"
-        intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(to))
+        intent.putExtra(Intent.EXTRA_EMAIL, arrayOf(email))
         startActivity(intent)
         return "200"
     } catch (e: ActivityNotFoundException) {

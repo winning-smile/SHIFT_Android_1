@@ -55,7 +55,7 @@ fun bottomBar(viewModel: MainViewModel, prefDataStore: PrefDataStore, navControl
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center){
                 Text("Info ", fontWeight = FontWeight.Bold, fontSize = 15.sp, color= Color.White)
                 Icon(imageVector = Icons.Filled.Info,
-                    contentDescription = "Test", tint = Color.White, modifier = Modifier.size(30.dp)
+                    contentDescription = "Info Icon", tint = Color.White, modifier = Modifier.size(30.dp)
                 )
             }
         }
@@ -66,7 +66,7 @@ fun bottomBar(viewModel: MainViewModel, prefDataStore: PrefDataStore, navControl
             Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center){
                 Text("Refresh", fontWeight = FontWeight.Bold, fontSize = 15.sp, color= Color.White)
                 Icon(imageVector = Icons.Filled.Refresh,
-                    contentDescription = "Test", tint = Color.White, modifier = Modifier.size(30.dp)
+                    contentDescription = "Refresh Icon", tint = Color.White, modifier = Modifier.size(30.dp)
                 )
             }
         }

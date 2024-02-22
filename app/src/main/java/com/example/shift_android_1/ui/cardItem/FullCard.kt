@@ -55,7 +55,7 @@ fun fullCard(person: ApiResponse,  navController: NavController) {
                 } }))
     {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            Image(rememberAsyncImagePainter(person.results[0].picture.medium), contentDescription = "Test",contentScale = ContentScale.Crop,
+            Image(rememberAsyncImagePainter(person.results[0].picture.medium), contentDescription = "Person photo",contentScale = ContentScale.Crop,
                 modifier = Modifier.size(80.dp).clip(RoundedCornerShape(16.dp)))
 
             Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 10.dp)){

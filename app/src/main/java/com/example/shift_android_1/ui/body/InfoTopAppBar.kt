@@ -41,7 +41,7 @@ fun infoTopAppBarView(viewModel: MainViewModel, navController: NavController) {
         }){
             Row(verticalAlignment = Alignment.CenterVertically){
                 Icon(imageVector = Icons.Filled.ArrowLeft,
-                    contentDescription = "Test", tint = shiftPrimary, modifier = Modifier.size(30.dp)
+                    contentDescription = "ArrowLeft icon", tint = shiftPrimary, modifier = Modifier.size(30.dp)
                 )
                 Text("Back", fontWeight = FontWeight.Bold, fontSize = 15.sp, color= shiftPrimary)
             }

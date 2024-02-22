@@ -67,7 +67,7 @@ fun infoBody(
             // IMAGE
             Row(modifier = Modifier.fillMaxWidth().padding(vertical = 10.dp), horizontalArrangement = Arrangement.Center){
                 Image(
-                    rememberAsyncImagePainter(result.results[0].picture.large), contentDescription = "Test",contentScale = ContentScale.Crop,
+                    rememberAsyncImagePainter(result.results[0].picture.large), contentDescription = "Person photo",contentScale = ContentScale.Crop,
                     modifier = Modifier.size(100.dp).clip(RoundedCornerShape(16.dp)))
             }
             // BIO
@@ -75,7 +75,7 @@ fun infoBody(
                 Text("BIO", fontWeight = FontWeight.SemiBold, fontSize = 15.sp, color= shiftPrimary)
                 IconButton(onClick = {viewModel.isSheetOpenBio = !viewModel.isSheetOpenBio}){
                     Icon(imageVector = if (!viewModel.isSheetOpenBio) Icons.Filled.ArrowDropDown else Icons.Filled.ArrowDropUp,
-                        contentDescription = "Test", tint = shiftPrimary
+                        contentDescription = "ArrowDropDown Icon/UP", tint = shiftPrimary
                     )
                 }
             }
@@ -98,7 +98,7 @@ fun infoBody(
                 Text("Contacts", fontWeight = FontWeight.SemiBold, fontSize = 15.sp, color= shiftPrimary)
                 IconButton(onClick = {viewModel.isSheetOpenContact = !viewModel.isSheetOpenContact}){
                     Icon(imageVector = if (!viewModel.isSheetOpenContact) Icons.Filled.ArrowDropDown else Icons.Filled.ArrowDropUp,
-                        contentDescription = "Test", tint = shiftPrimary
+                        contentDescription = "ArrowDropDown/UP Icon", tint = shiftPrimary
                     )
                 }
             }
@@ -123,7 +123,7 @@ fun infoBody(
                                 }
                             }}){
                             Icon(imageVector = Icons.Filled.Mail,
-                                contentDescription = "Test", tint = shiftPrimary)
+                                contentDescription = "Mail icon", tint = shiftPrimary)
                         }
                         Text("Email: ${result.results[0].email}")
                     }
@@ -135,7 +135,7 @@ fun infoBody(
                                 }
                             }}){
                                 Icon(imageVector = Icons.Filled.Call,
-                                    contentDescription = "Test", tint = shiftPrimary)
+                                    contentDescription = "Call icon", tint = shiftPrimary)
                         }
                         Text("Phone number: ${result.results[0].phone}")
                     }
@@ -147,7 +147,7 @@ fun infoBody(
                                 }
                             }}){
                             Icon(imageVector = Icons.Filled.Call,
-                                contentDescription = "Test", tint = shiftPrimary)
+                                contentDescription = "Call icon", tint = shiftPrimary)
                         }
                         Text("Cell: ${result.results[0].cell}")
                     }
@@ -158,7 +158,7 @@ fun infoBody(
                 Text("Location", fontWeight = FontWeight.SemiBold, fontSize = 15.sp, color= shiftPrimary)
                 IconButton(onClick = {viewModel.isSheetOpenLocation = !viewModel.isSheetOpenLocation}) {
                     Icon(imageVector = if (!viewModel.isSheetOpenLocation) Icons.Filled.ArrowDropDown else Icons.Filled.ArrowDropUp,
-                        contentDescription = "Test", tint = shiftPrimary
+                        contentDescription = "ArrowDropDown/UP icon", tint = shiftPrimary
                     )
                 }
             }
@@ -184,7 +184,7 @@ fun infoBody(
                                 }
                             }}){
                             Icon(imageVector = Icons.Filled.Place,
-                                contentDescription = "Test", tint = shiftPrimary)
+                                contentDescription = "Place icon", tint = shiftPrimary)
                         }
                         Text("Address: ${result.results[0].location.street.number.toString()} ${result.results[0].location.street.name}")
                     }
@@ -204,7 +204,7 @@ fun infoBody(
                                 }
                             }}){
                             Icon(imageVector = Icons.Filled.Place,
-                                contentDescription = "Test", tint = shiftPrimary)
+                                contentDescription = "Place Icon", tint = shiftPrimary)
                         }
                         Text("Coordinates: ${result.results[0].location.coordinates.latitude} ${result.results[0].location.coordinates.longitude}")
                     }
@@ -216,7 +216,7 @@ fun infoBody(
                 Text("Account information", fontWeight = FontWeight.SemiBold, fontSize = 15.sp, color= shiftPrimary)
                 IconButton(onClick = {viewModel.isSheetOpenLogin = !viewModel.isSheetOpenLogin}) {
                     Icon(imageVector = if (!viewModel.isSheetOpenLogin) Icons.Filled.ArrowDropDown else Icons.Filled.ArrowDropUp,
-                        contentDescription = "Test", tint = shiftPrimary
+                        contentDescription = "ArrowDropDown/UP icon", tint = shiftPrimary
                     )
                 }
             }
@@ -239,7 +239,7 @@ fun infoBody(
                 Text("Metadata", fontWeight = FontWeight.SemiBold, fontSize = 15.sp, color= shiftPrimary)
                 IconButton(onClick = {viewModel.isSheetOpenMeta = !viewModel.isSheetOpenMeta}) {
                     Icon(imageVector = if (!viewModel.isSheetOpenMeta) Icons.Filled.ArrowDropDown else Icons.Filled.ArrowDropUp,
-                        contentDescription = "Test", tint = shiftPrimary
+                        contentDescription = "ArrowDropDown/UP icon", tint = shiftPrimary
                     )
                 }
             }
