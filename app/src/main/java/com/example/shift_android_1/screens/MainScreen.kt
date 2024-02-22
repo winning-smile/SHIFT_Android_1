@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import com.example.shift_android_1.models.DataState
 import com.example.shift_android_1.models.MainViewModel
 import com.example.shift_android_1.models.ApiResponse
@@ -27,7 +28,7 @@ import com.example.shift_android_1.ui.cardItem.fullCard
 
 /* TODO  УДАЛИТЬ НЕНУЖНЫЕ ИМПОРТЫ */
 @Composable
-fun mainScreen(viewModel: MainViewModel)
+fun mainScreen(viewModel: MainViewModel,  navController: NavController)
 {
 
     when (val result = viewModel.response.value) {
@@ -46,7 +47,7 @@ fun mainScreen(viewModel: MainViewModel)
                 bottomBar = { bottomBar() },
                 backgroundColor = shiftBackground
             ) { innerPadding ->
-                ShowLazyList(result.data, innerPadding)
+                ShowLazyList(result.data, innerPadding,  navController)
             }
         }
 
@@ -76,10 +77,10 @@ fun mainScreen(viewModel: MainViewModel)
 
 
 @Composable
-fun ShowLazyList(persons: MutableList<ApiResponse>, innerPadding: PaddingValues){
+fun ShowLazyList(persons: MutableList<ApiResponse>, innerPadding: PaddingValues,  navController: NavController){
     LazyColumn(modifier = Modifier.padding(innerPadding)){
         items(persons) { person ->
-            fullCard(person)
+            fullCard(person, navController)
         }
     }
 }

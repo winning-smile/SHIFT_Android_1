@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.core.view.WindowInsetsControllerCompat
+import com.example.shift_android_1.models.ComposeNavigation
 import com.example.shift_android_1.models.MainViewModel
 import com.example.shift_android_1.screens.mainScreen
 import kotlinx.coroutines.CoroutineScope
@@ -49,7 +50,7 @@ class MainActivity : AppCompatActivity() {
                 val controller = WindowInsetsControllerCompat(window, window.decorView)
                 controller.isAppearanceLightStatusBars = true
 
-                mainScreen(viewModel)
+                ComposeNavigation(viewModel)
             }
         }
 

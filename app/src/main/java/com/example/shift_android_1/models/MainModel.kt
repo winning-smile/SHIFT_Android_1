@@ -4,7 +4,9 @@ import PrefDataStore
 import android.annotation.SuppressLint
 import android.util.Log
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.GsonBuilder
@@ -18,7 +20,6 @@ import java.io.InputStreamReader
 import java.net.URL
 import javax.net.ssl.HttpsURLConnection
 
-
 sealed class DataState {
     class Success(val data: MutableList<ApiResponse>) : DataState()
     class Failure(val message: String) : DataState()
@@ -28,7 +29,14 @@ sealed class DataState {
 class MainViewModel() : ViewModel() {
     val response: MutableState<DataState> = mutableStateOf(DataState.Empty)
     private var rawResponse: String = ""
+    var isSheetOpenContact: MutableState<Boolean> = mutableStateOf(false)
+    var isSheetOpenLocation by mutableStateOf(false)
+    var isSheetOpenLogin by mutableStateOf(false)
 
+    fun test(target: MutableState<Boolean>){
+        Log.i("BOOL", target.value.toString())
+        target.value = !target.value
+    }
 
     fun setFromStorage(rawString: String){
         val gson = GsonBuilder().create()
