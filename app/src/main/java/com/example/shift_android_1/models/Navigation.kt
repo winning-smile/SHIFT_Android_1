@@ -17,9 +17,10 @@ fun ComposeNavigation(viewModel: MainViewModel) {
         composable("main_screen") {
             mainScreen(viewModel, navController = navController)
         }
-        composable("info_screen")
+        composable(route = "info_screen")
         {
-            infoScreen(viewModel, navController = navController)
+            val result = navController.previousBackStackEntry?.savedStateHandle?.get<ApiResponse>("person_data")
+            infoScreen(result, viewModel, navController = navController)
         }
     }
 }

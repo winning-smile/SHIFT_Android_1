@@ -41,6 +41,11 @@ fun fullCard(person: ApiResponse,  navController: NavController) {
                 color = Color.DarkGray
             ),
             onClick = {
+                val datas = person
+                navController.currentBackStackEntry?.savedStateHandle?.set(
+                    key="person_data",
+                    value = datas
+                )
                 navController.navigate("info_screen")
                 {
                     popUpTo(navController.graph.findStartDestination().id)

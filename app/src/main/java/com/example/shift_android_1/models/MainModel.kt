@@ -29,13 +29,18 @@ sealed class DataState {
 class MainViewModel() : ViewModel() {
     val response: MutableState<DataState> = mutableStateOf(DataState.Empty)
     private var rawResponse: String = ""
-    var isSheetOpenContact: MutableState<Boolean> = mutableStateOf(false)
+    var isSheetOpenBio by mutableStateOf(true)
+    var isSheetOpenContact by mutableStateOf(false)
     var isSheetOpenLocation by mutableStateOf(false)
     var isSheetOpenLogin by mutableStateOf(false)
+    var isSheetOpenMeta by mutableStateOf(false)
 
-    fun test(target: MutableState<Boolean>){
-        Log.i("BOOL", target.value.toString())
-        target.value = !target.value
+    fun restorePopUps(){
+        isSheetOpenBio = true
+        isSheetOpenContact = false
+        isSheetOpenLocation = false
+        isSheetOpenLogin = false
+        isSheetOpenMeta = false
     }
 
     fun setFromStorage(rawString: String){
